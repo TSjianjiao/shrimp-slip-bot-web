@@ -8,6 +8,7 @@ const Home:FC<any> = () => {
 
     } }>添加</button>
     <h1>The value of customKey is: {process.env.customKey}</h1>
+    <img src = "/1.png"/>
   </div>
 }
 export default Home

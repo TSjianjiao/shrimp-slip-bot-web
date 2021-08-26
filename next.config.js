@@ -1,4 +1,5 @@
 module.exports = {
+  // next运行时的env
   env: {
     customKey: 'my-value',
   },

@@ -1,6 +1,7 @@
-
 const { parse } = require('url')
+const fs = require('fs/promises')
 const { ApolloServer } = require('apollo-server-koa')
+const { ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginLandingPageDisabled} = require('apollo-server-core')
 const { typeDefs, resolvers } = require('./controllers/graphql')
 const mongoose = require('./db')
 const logConfig = require('./config/logger.config')
@@ -25,8 +26,8 @@ const koaBody = require('koa-body')
 
 // next
 const next = require('next')
-const app = next({ dev, dir: './src/'})
-const handle = app.getRequestHandler()
+const nextApp = next({ dev, dir: './src/'})
+const handle = nextApp.getRequestHandler()
 
 // err
 const errHandler = require('./utils/errHandler')
@@ -34,17 +35,40 @@ const errHandler = require('./utils/errHandler')
 // 中间件
 koaApp.use(errHandler)
 
+koaApp.use(require('koa-static')('.', {}))
+
 koaApp.use(koaBody())
 
 koaApp
   .use(apiRouter.routes())
   .use(apiRouter.allowedMethods())
 
-app.prepare().then(async () => {
+nextApp.prepare().then(async () => {
 
   // graphql
-  const server = new ApolloServer({ typeDefs, resolvers })
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    plugins: [
+      dev ? ApolloServerPluginLandingPageLocalDefault : {
+        async serverWillStart () {
+          return {
+            async renderLandingPage () {
+              const landingPageBuffer = await fs.readFile('./src/backend/pages/graphqlPage_pro.html')
+              // landingPageBuffer.toString('utf-8')
+              // const html = '<!DOCTYPE html><html>  <head>  </head>  <body>    <h1>Hello world!</h1>  </body></html>'
+              return { html: landingPageBuffer.toString('utf-8') }
+            }
+          }
+        }
+      }
+    ]
+  })
   await server.start()
+
+  // 一定要在下面的中间件之前引入
+  // 不然路由就被next的拦截了
+  server.applyMiddleware({ app: koaApp })
 
   koaApp.use(async (ctx, next) => {
     const parsedUrl = parse(ctx.req.url, true)
@@ -52,7 +76,6 @@ app.prepare().then(async () => {
     ctx.respond = false
   })
 
-  server.applyMiddleware({ app: koaApp })
   koaApp.listen(port, () => {
     console.log(`
       🚀graphql：http://localhost:${ port }${ server.graphqlPath }
