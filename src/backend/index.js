@@ -35,8 +35,6 @@ const errHandler = require('./utils/errHandler')
 // 中间件
 koaApp.use(errHandler)
 
-koaApp.use(require('koa-static')('.', {}))
-
 koaApp.use(koaBody())
 
 koaApp
@@ -55,8 +53,6 @@ nextApp.prepare().then(async () => {
           return {
             async renderLandingPage () {
               const landingPageBuffer = await fs.readFile('./src/backend/pages/graphqlPage_pro.html')
-              // landingPageBuffer.toString('utf-8')
-              // const html = '<!DOCTYPE html><html>  <head>  </head>  <body>    <h1>Hello world!</h1>  </body></html>'
               return { html: landingPageBuffer.toString('utf-8') }
             }
           }

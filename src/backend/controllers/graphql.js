@@ -39,7 +39,7 @@ class Graphql extends Controller {
   constructor () {
     super()
   }
-
+  a (){}
 }
 
 const books = [

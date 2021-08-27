@@ -2,12 +2,11 @@
   "name": "shrimp-slip-bot-web",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/TSjianjiao/shrimp-slip-bot-web.git",
   "author": "xuhang <929175050@qq.com>",
   "license": "MIT",
   "scripts": {
     "build": "next build",
-    "dev": "node ./src/backend/index.js"
+    "dev": "npx nodemon ./src/backend/index.js"
   },
   "dependencies": {
     "@koa/router": "^10.1.1",
@@ -19,7 +18,6 @@
     "graphql": "^15.5.1",
     "koa": "^2.13.1",
     "koa-body": "^4.2.0",
-    "koa-static": "^5.0.0",
     "log4js": "^6.3.0",
     "lottie-web": "^5.7.13",
     "mongodb": "^4.0.1",
