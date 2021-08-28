@@ -1,6 +1,6 @@
-const { Context, Next } = require('koa')
-const Pigs = require('../models/pigs')
-const Controller = require('./index')
+import { Context, Next } from 'koa'
+import Pigs from '@/models/pigs'
+import Controller from './index'
 class PigController extends Controller {
   constructor () {
     super()
@@ -45,4 +45,4 @@ class PigController extends Controller {
   }
 }
 
-module.exports = new PigController()
+export default new PigController()

@@ -1,6 +1,6 @@
-const { Context, Next } = require('koa')
-const { ApolloServer, gql } = require('apollo-server-koa')
-const typeDefs = gql`
+import { Context, Next } from 'koa'
+import { ApolloServer, gql } from 'apollo-server-koa'
+export const typeDefs = gql`
   type Book {
     title: String
     author: String
@@ -10,7 +10,7 @@ const typeDefs = gql`
     books: [Book]
   }
 `
-const resolvers = {
+export const resolvers = {
   Query: {
     books: () => books,
   },
@@ -26,8 +26,3 @@ const books = [
     author: 'Paul Auster',
   },
 ]
-
-module.exports = {
-  typeDefs,
-  resolvers
-}

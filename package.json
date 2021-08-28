@@ -5,10 +5,9 @@
   "author": "xuhang <929175050@qq.com>",
   "license": "MIT",
   "scripts": {
-    "build": "next build",
-    "dev": "npx nodemon ./backend/serverDist/server.min.js",
-    "serverBuild": "npx webpack --config ./backend/webpack.config.js",
-    "devW": "npx webpack serve --config ./backend/webpack.config.js"
+    "build": "next build && npx webpack",
+    "web-dev": "npx nodemon ./backend/serverDist/server.min.js",
+    "back-dev": "npx webpack watch --config ./backend/webpack.config.js"
   },
   "dependencies": {
     "@koa/router": "^10.1.1",

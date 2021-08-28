@@ -1,7 +1,7 @@
 // @ts-check
-const path = require('path')
-const requireAll = require('require-all')
-const Router = require('@koa/router')
+import path from 'path'
+import requireAll from 'require-all'
+import Router from '@koa/router'
 // 加载所有Controllers
 const controllers = requireAll({
   dirname     :  path.join(__dirname, '../controllers'),
@@ -19,4 +19,4 @@ for(let i in controllers) {
     router[route.method](route.path, route.handle)
   })
 }
-module.exports = router
+export default router

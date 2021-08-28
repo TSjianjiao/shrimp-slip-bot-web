@@ -5,7 +5,7 @@
     "node_modules/**/node_modules"
   ],
   "watch": [
-    "./src/backend/**/*"
+    "./backend/serverDist/**/*"
   ],
-  "ext": "js,json,gql,ts"
+  "ext": "js"
 }

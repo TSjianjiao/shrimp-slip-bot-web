@@ -1,6 +1,6 @@
 
 // 具体配置参考
-module.exports = {
+export default {
   uri: 'mongodb://[username]:[passward]@[ip]',
   connectionOptions: {
     useNewUrlParser: true,

@@ -1,6 +1,6 @@
 import logger from '@/utils/logger'
-const mongoose = require('mongoose')
-const DBConfig = require('./config/db.config')
+import mongoose from 'mongoose'
+import DBConfig from './config/db.config'
 mongoose.set('useFindAndModify', false)
 
 mongoose.connect(DBConfig.uri, DBConfig.connectionOptions, err => {
@@ -13,4 +13,4 @@ mongoose.connect(DBConfig.uri, DBConfig.connectionOptions, err => {
   }
 })
 
-module.exports = mongoose
+export default mongoose

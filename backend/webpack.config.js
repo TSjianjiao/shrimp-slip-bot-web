@@ -7,7 +7,7 @@ let externals = _externals()
 /** @type {import('webpack').Configuration} */
 module.exports = {
   entry: {
-    'server.min': path.join(__dirname, 'index.js'),
+    'server.min': path.join(__dirname, 'index.ts'),
   },
   mode: 'production',
   target: 'node',
@@ -51,7 +51,6 @@ module.exports = {
       })
     ]
   },
-  watch: true
 }
 
 function _externals () {

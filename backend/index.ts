@@ -1,31 +1,31 @@
-const { parse } = require('url')
-const fs = require('fs/promises')
-const { ApolloServer } = require('apollo-server-koa')
-const { ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginLandingPageDisabled} = require('apollo-server-core')
-const { typeDefs, resolvers } = require('@/controllers/graphql')
-const mongoose = require('./db')
-const logConfig = require('./config/logger.config')
+import { parse } from 'url'
+import fs from 'fs/promises'
+import { ApolloServer } from 'apollo-server-koa'
+import { ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginLandingPageDisabled } from 'apollo-server-core'
+import { typeDefs, resolvers } from '@/controllers/graphql'
+import mongoose from './db'
+import logConfig from './config/logger.config'
 const dev = process.env.NODE_ENV !== 'production'
 const port = 3003
 
 
 // koa
-const Koa = require('koa')
+import Koa from 'koa'
 const koaApp = new Koa()
 
 // koa router
-const apiRouter = require('./router/api')
+import apiRouter from './router/api'
 
 // body
-const koaBody = require('koa-body')
+import koaBody from 'koa-body'
 
 // next
-const next = require('next')
+import next from 'next'
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
 
 // err
-const errHandler = require('./utils/errHandler')
+import errHandler from './utils/errHandler'
 
 // 中间件
 koaApp.use(errHandler)
@@ -47,7 +47,7 @@ nextApp.prepare().then(async () => {
         async serverWillStart () {
           return {
             async renderLandingPage () {
-              const landingPageBuffer = await fs.readFile('./src/backend/pages/graphqlPage_pro.html')
+              const landingPageBuffer = await fs.readFile('./backend/pages/graphqlPage_pro.html')
               return { html: landingPageBuffer.toString('utf-8') }
             }
           }

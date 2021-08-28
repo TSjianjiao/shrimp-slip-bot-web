@@ -22,4 +22,4 @@ const ErrorHandle = async (ctx, next) => {
     }
   }
 }
-module.exports = ErrorHandle
+export default ErrorHandle
