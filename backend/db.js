@@ -1,3 +1,4 @@
+import logger from '@/utils/logger'
 const mongoose = require('mongoose')
 const DBConfig = require('./config/db.config')
 mongoose.set('useFindAndModify', false)

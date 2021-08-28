@@ -1,3 +1,4 @@
+import logger from '@/utils/logger'
 const ErrorHandle = async (ctx, next) => {
   try {
     await next()

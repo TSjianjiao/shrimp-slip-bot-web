@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "rootDir": "./",
+    "target": "es6",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": false,
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+    "jsx": "preserve",
+    "declaration": true,
+    "baseUrl": "./",
+    "sourceMap": true,
+    "paths": {
+      "@/*": ["./*"],
+    }
+  }
+}

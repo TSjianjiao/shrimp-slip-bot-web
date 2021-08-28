@@ -6,5 +6,6 @@
   ],
   "watch": [
     "./src/backend/**/*"
-  ]
+  ],
+  "ext": "js,json,gql,ts"
 }

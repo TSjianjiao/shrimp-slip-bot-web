@@ -2,17 +2,12 @@ const { parse } = require('url')
 const fs = require('fs/promises')
 const { ApolloServer } = require('apollo-server-koa')
 const { ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginLandingPageDisabled} = require('apollo-server-core')
-const { typeDefs, resolvers } = require('./controllers/graphql')
+const { typeDefs, resolvers } = require('@/controllers/graphql')
 const mongoose = require('./db')
 const logConfig = require('./config/logger.config')
 const dev = process.env.NODE_ENV !== 'production'
 const port = 3003
 
-// log
-const log4js = require('log4js')
-log4js.configure(logConfig)
-const logger= log4js.getLogger()
-global.logger = logger
 
 // koa
 const Koa = require('koa')
@@ -26,7 +21,7 @@ const koaBody = require('koa-body')
 
 // next
 const next = require('next')
-const nextApp = next({ dev, dir: './src/'})
+const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
 
 // err

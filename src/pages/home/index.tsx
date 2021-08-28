@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import { useSelector } from 'react-redux'
-
 const Home:FC<any> = () => {
 
   return <div>
@@ -8,7 +7,7 @@ const Home:FC<any> = () => {
 
     } }>添加</button>
     <h1>The value of customKey is123444: {process.env.customKey}</h1>
-    <img src = "/1.png"/>
+    <img src = "/1.gif"/>
   </div>
 }
 export default Home
