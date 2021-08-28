@@ -34,4 +34,4 @@ yarn-error.log*
 .vercel
 *.log
 
-**/db.config.js
+**/*/db.config.ts
