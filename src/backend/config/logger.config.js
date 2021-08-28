@@ -12,21 +12,6 @@ module.exports = {
         type: 'coloured'
       }
     },
-    // email: {
-    //     type: '@log4js-node/smtp',
-    //      //发送邮件的邮箱
-    //     sender: '1092946821@qq.com',
-    //      //标题
-    //     subject: 'Latest error report',
-    //     SMTP: {
-    //         host: 'smtp.qq.com',
-    //         auth: {
-    //           user: '1092946821@qq.com',
-    //           pass: 'dfsbopdkwbwmgcfd',
-    //         },
-    //     },
-    //     recipients: '929175050@qq.com'
-    // }
   },
   categories: {
     default: { appenders: ['defualt'], level: 'info' },
