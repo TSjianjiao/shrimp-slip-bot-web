@@ -1,13 +1,12 @@
 import { parse } from 'url'
 import fs from 'fs/promises'
 import { ApolloServer } from 'apollo-server-koa'
-import { ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginLandingPageDisabled } from 'apollo-server-core'
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core'
 import { typeDefs, resolvers } from '@/controllers/graphql'
-import mongoose from './db'
-import logConfig from './config/logger.config'
+
+import './db'
 const dev = process.env.NODE_ENV !== 'production'
 const port = 3003
-
 
 // koa
 import Koa from 'koa'

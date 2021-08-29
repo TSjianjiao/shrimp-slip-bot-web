@@ -1,28 +1,10 @@
-import { Context, Next } from 'koa'
-import { ApolloServer, gql } from 'apollo-server-koa'
-export const typeDefs = gql`
-  type Book {
-    title: String
-    author: String
-  }
+import combineDefs from '@/utils/graphql/combineDefs'
+import booksDefs from '@/models/graphql/books/books.gql'
+import booksResolvers from '@/models/graphql/books/books'
 
-  type Query {
-    books: [Book]
-  }
-`
-export const resolvers = {
-  Query: {
-    books: () => books,
-  },
-}
 
-const books = [
-  {
-    title: 'The Awakening',
-    author: 'Kate Chopin',
-  },
-  {
-    title: 'City of Glass',
-    author: 'Paul Auster',
-  },
-]
+export const typeDefs = combineDefs({
+  booksDefs
+})
+export const resolvers = {...booksResolvers}
+

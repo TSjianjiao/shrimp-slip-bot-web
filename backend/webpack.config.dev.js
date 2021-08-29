@@ -8,8 +8,9 @@ let externals = _externals()
 module.exports = {
   entry: {
     'server.min': path.join(__dirname, 'index.ts'),
+    'server': path.join(__dirname, 'index.ts'),
   },
-  mode: 'production',
+  mode: 'development',
   target: 'node',
   output: {
     path: path.resolve(__dirname, 'serverDist'),
@@ -17,7 +18,7 @@ module.exports = {
     clean: true
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.gql'],
     alias: {
       '@': path.join(__dirname)
     },
@@ -62,6 +63,7 @@ module.exports = {
       })
     ]
   },
+  watch: true
 }
 
 function _externals () {

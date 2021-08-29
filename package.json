@@ -5,9 +5,10 @@
   "author": "xuhang <929175050@qq.com>",
   "license": "MIT",
   "scripts": {
-    "build": "next build && npx webpack",
+    "build": "next build && yarn back-build",
     "web-dev": "npx nodemon ./backend/serverDist/server.min.js",
-    "back-dev": "npx webpack watch --config ./backend/webpack.config.js"
+    "back-dev": "npx webpack --config ./backend/webpack.config.dev.js",
+    "back-build": "npx webpack --config ./backend/webpack.config.js"
   },
   "dependencies": {
     "@koa/router": "^10.1.1",
@@ -39,6 +40,7 @@
     "@typescript-eslint/parser": "^4.29.3",
     "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.24.0",
+    "loader-utils": "^2.0.0",
     "ts-loader": "^9.2.5",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5",

@@ -6,7 +6,7 @@ const Home:FC<any> = () => {
     <button onClick = { () => {
 
     } }>添加</button>
-    <h1>The value of customKey is123444: {process.env.customKey}</h1>
+    <h1>The value of customKey is: {process.env.customKey}</h1>
     <img src = "/1.gif"/>
   </div>
 }
