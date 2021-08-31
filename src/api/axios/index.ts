@@ -24,21 +24,36 @@ instance.interceptors.request.use(config => {
   return error?.response?.data || error
 })
 
-instance.interceptors.response.use(response => {
-  const { data:axiosData } = response
-  try {
-    if(axiosData.error) {
+instance.interceptors.response.use(
+  response => {
+    const { data:axiosData } = response
+    let success = true
+    let error = ''
+    try {
+      if(axiosData.error) {
+        success = false
+        message.error(axiosData.error)
+      }
+    }catch(err) {
+      error = err
+      success = false
       message.error(axiosData.error)
     }
-  }catch(err) {}
 
-  return axiosData
-}, error => {
-  try {
-    message.error(error.response.data.error)
-  }catch(err) {}
-  return error?.response?.data || error
-})
+    return {
+      success,
+      error,
+      data: axiosData,
+    } as any
+  }, 
+  error => {
+    message.error(error)
+    return {
+      success: false,
+      error,
+      data: null,
+    } as any
+  })
 
 
 export default instance

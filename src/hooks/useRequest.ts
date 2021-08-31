@@ -24,9 +24,13 @@ export interface Response<D> {
   success: boolean
 }
 
-export default <ResponseType = any>(options: Options) => {
+export default <ResponseType = any>(options: Options): [Response<ResponseType>, (_config?: AxiosRequestConfig) => Promise<void>] => {
   // 响应对象
-  const [response, setResponse] = useState<Response<ResponseType>>(null)
+  const [response, setResponse] = useState<Response<ResponseType>>({
+    loading: false,
+    data: null,
+    success: false
+  })
 
   // 立即执行
   useEffect(() => {
@@ -37,20 +41,31 @@ export default <ResponseType = any>(options: Options) => {
 
   // 触发函数
   const trigger = useCallback(async (_config?: AxiosRequestConfig) => {
+    if(response.loading) {
+      return 
+    }
     setResponse({
       loading: true,
       data: null,
       success:  false
     })
-    const res: CommonRes<ResponseType> = await axios({
-      ...options.config,
-      ..._config
-    })
-    setResponse({
-      loading: false,
-      data: res.data,
-      success:  !res.error
-    })
+    try {
+      const res: CommonRes<ResponseType> = await axios({
+        ...options.config,
+        ..._config
+      })
+      setResponse({
+        loading: false,
+        data: res.data,
+        success: true
+      })
+    }catch(err) {
+      setResponse({
+        loading: false,
+        data: null,
+        success: false
+      })
+    }
   }, [])
 
   return [

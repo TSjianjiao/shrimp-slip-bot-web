@@ -1,24 +1,27 @@
-import React, { FC, useLayoutEffect, useRef } from 'react'
+import React, { FC, useEffect, useRef } from 'react'
 import LottiePlayer, { AnimationConfigWithData, AnimationConfigWithPath } from 'lottie-web'
 import styles from './index.module.scss'
+import cs from 'classname'
 interface LottieProps {
+  className?: string
   params: Partial<AnimationConfigWithPath | AnimationConfigWithData>
-  // params: Partial<Omit<(AnimationConfigWithPath | AnimationConfigWithData), 'container'>>
 }
 const Lottie:FC<LottieProps>  = ({
-  params
+  params,
+  className
 }) => {
   const containerRef = useRef<HTMLDivElement>()
-  useLayoutEffect(() => {
+  useEffect(() => {
     if(containerRef.current) {
       LottiePlayer.loadAnimation({
         container: containerRef.current,
         ...params
+     
       })
     }
   }, [])
   return (
-    <div ref = { containerRef } className = { styles['container'] }>
+    <div ref = { containerRef } className = { cs(styles['container'], className) }>
       
     </div>
   )
