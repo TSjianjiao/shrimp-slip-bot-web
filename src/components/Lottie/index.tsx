@@ -1,25 +1,30 @@
-import React, { FC, useEffect, useRef } from 'react'
-import LottiePlayer, { AnimationConfigWithData, AnimationConfigWithPath } from 'lottie-web'
+import React, { FC, useEffect, useRef, useState } from 'react'
+import LottiePlayer, { AnimationConfigWithData, AnimationConfigWithPath, AnimationItem } from 'lottie-web'
 import styles from './index.module.scss'
-import cs from 'classname'
+import cs from 'classnames'
 interface LottieProps {
   className?: string
   params: Partial<AnimationConfigWithPath | AnimationConfigWithData>
+  onPlayerReady?: (ins:AnimationItem) => any
 }
 const Lottie:FC<LottieProps>  = ({
   params,
-  className
+  className,
+  onPlayerReady = () => {}
 }) => {
   const containerRef = useRef<HTMLDivElement>()
+  const [lottieInstance, setLottieInstance] = useState<AnimationItem>(null)
   useEffect(() => {
     if(containerRef.current) {
-      LottiePlayer.loadAnimation({
+      const ins = LottiePlayer.loadAnimation({
         container: containerRef.current,
         ...params
-     
       })
+      setLottieInstance(ins)
+      onPlayerReady(ins)
     }
   }, [])
+  
   return (
     <div ref = { containerRef } className = { cs(styles['container'], className) }>
       

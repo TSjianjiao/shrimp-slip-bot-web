@@ -1,9 +1,43 @@
-.lottie-container {
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
   right: 50%;
   top: 50%;
   transform: translate(50%, -100%);
-  width: 300px;
-  height: 300px;
-  cursor: pointer;
+  .lottie-container {
+    width: 300px;
+    height: 300px;
+    cursor:grab;
+  }
+  .login {
+    position: absolute;
+    width: 500px;
+    height: 300px;
+    right: 50%;
+    top: 0;
+    transform: translate(50%, 0);
+    border-radius: 15px;
+    z-index: -1;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    margin-top: 10px;
+    opacity: 0;
+    &-active {
+      animation: show_login 0.5s ease-in-out 1.5s running forwards;
+    }
+  }
+}
+
+@keyframes show_login {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+
+  100% {
+    top: 200px;
+    opacity: 1;
+    z-index: 1;
+  }
 }
