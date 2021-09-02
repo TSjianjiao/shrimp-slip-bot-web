@@ -3300,7 +3300,7 @@ eval("var inherits = __webpack_require__(/*! inherits */ \"./node_modules/inheri
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.default = {\r\n    uri: 'mongodb://admin:xh19963900@127.0.0.1:27017',\r\n    connectionOptions: {\r\n        useNewUrlParser: true,\r\n        useUnifiedTopology: true,\r\n        dbName: 'areyoulate',\r\n    },\r\n};\r\n\n\n//# sourceURL=webpack://shrimp-slip-bot-web/./backend/config/db.config.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.default = {\r\n    // uri: \"mongodb://admin:xh19963900@8.130.48.20:27017\",\r\n    uri: 'mongodb://admin:xh19963900@127.0.0.1:27017',\r\n    connectionOptions: {\r\n        useNewUrlParser: true,\r\n        useUnifiedTopology: true,\r\n        dbName: 'areyoulate',\r\n    },\r\n};\r\n\n\n//# sourceURL=webpack://shrimp-slip-bot-web/./backend/config/db.config.ts?");
 
 /***/ }),
 

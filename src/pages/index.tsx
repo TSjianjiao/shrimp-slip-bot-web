@@ -4,8 +4,7 @@ import Lottie from '../components/Lottie'
 import _throttle from 'lodash/throttle'
 import styles from './index.module.scss'
 import cs from 'classnames'
-import Button from '@material-ui/core/Button'
-import { TextField } from '@material-ui/core'
+import { TextField, Button } from '@material-ui/core'
 
 let count = 0
 let timer = 0
@@ -42,7 +41,7 @@ const Index  = () => {
   }, [])
 
   useEffect(() => {
-    if(!isActive && lottieInstance?.currentFrame <= 390 && touchCount >= 3) {
+    if(!isActive && lottieInstance?.currentFrame <= 390 && touchCount >= 2) {
       lottieInstance.playSegments(
         [390, 480],
         true
@@ -69,19 +68,19 @@ const Index  = () => {
     if(!showLogin) {
       if(isActive) {
         setShowLogin(true)
-      } 
+      }
     }
   }, [isActive, showLogin])
   return (
     <>
       <div className = { styles['main'] }>
         <div
-          onMouseMove = { onMouseMove } 
+          onMouseMove = { onMouseMove }
           onMouseLeave = { onMouseLeave }
           className = { styles['lottie-container'] }>
-          <Lottie 
+          <Lottie
             onPlayerReady = { getLottieInstance }
-            params = { { 
+            params = { {
               path: '/lottieFiles/cat.json',
               loop: true,
               autoplay: false
@@ -89,13 +88,22 @@ const Index  = () => {
         </div>
 
         <div className = { cs(styles['login'], {[styles['login-active']]: showLogin}) }>
-          <div>
-            <TextField id = "standard-basic" label = "账号" variant = "outlined"/>
-          </div>
-          <div>
-            <TextField id = "standard-basic" label = "密码" type = 'password' variant = "outlined"/>
-          </div>
-          <Button variant = "contained" color = "primary">
+          <TextField
+            id = "account"
+            label = "账号"
+            classes = { {root: styles['input']} }
+            variant = "outlined"/>
+
+          <TextField
+            id = "pwd"
+            label = "密码"
+            type = 'password'
+            classes = { {root: styles['input']} }
+            variant = "outlined"/>
+          <Button
+            variant = "contained"
+            color = "primary"
+            classes = { {containedPrimary: styles['login-btn']} }>
             登录
           </Button>
         </div>

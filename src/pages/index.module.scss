@@ -12,6 +12,8 @@
     cursor:grab;
   }
   .login {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     width: 500px;
     height: 300px;
@@ -26,9 +28,19 @@
     &-active {
       animation: show_login 0.5s ease-in-out 1.5s running forwards;
     }
+    &>div {
+      flex: 1;
+    }
+    .login-btn {
+      background-color: #F4AB1F;
+      color: #fff
+    }
   }
 }
 
+.notched-outline {
+  border-color: #f50;
+}
 @keyframes show_login {
   0% {
     top: 0;
