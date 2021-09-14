@@ -12,6 +12,10 @@ const port = 3003
 import Koa from 'koa'
 const koaApp = new Koa()
 
+// jwt
+import koajwt from 'koa-jwt'
+import jwt from 'jsonwebtoken'
+
 // koa router
 import apiRouter from './router/api'
 
@@ -38,7 +42,7 @@ koaApp
 nextApp.prepare().then(async () => {
 
   // graphql
-  const server = new ApolloServer({
+  const graphqlServer = new ApolloServer({
     typeDefs,
     resolvers,
     plugins: [
@@ -52,13 +56,30 @@ nextApp.prepare().then(async () => {
           }
         }
       }
-    ]
+    ],
+    context: ({ ctx }: {ctx: Koa.Context}) => {
+      // Note: This example uses the `req` argument to access headers,
+      // but the arguments received by `context` vary by integration.
+      // This means they vary for Express, Koa, Lambda, etc.
+      //
+      // To find out the correct arguments for a specific integration,
+      // see https://www.apollographql.com/docs/apollo-server/api/apollo-server/#middleware-specific-context-fields
+
+      // Get the user token from the headers.
+      const token = ctx.headers.authorization || ''
+      // Try to retrieve a user with the token
+      // const user = getUser(token)
+      // Add the user to the context
+      return {
+        koaContext: ctx
+      }
+    },
   })
-  await server.start()
+  await graphqlServer.start()
 
   // 一定要在下面的中间件之前引入
   // 不然路由就被next的拦截了
-  server.applyMiddleware({ app: koaApp })
+  graphqlServer.applyMiddleware({ app: koaApp })
 
   koaApp.use(async (ctx, next) => {
     const parsedUrl = parse(ctx.req.url, true)
@@ -68,7 +89,7 @@ nextApp.prepare().then(async () => {
 
   koaApp.listen(port, () => {
     console.log(`
-      🚀graphql：http://localhost:${ port }${ server.graphqlPath }
+      🚀graphql：http://localhost:${ port }${ graphqlServer.graphqlPath }
       🧠next服务： http://localhost:${ port }
     `)
   })
