@@ -2,7 +2,7 @@ import { parse } from 'url'
 import fs from 'fs/promises'
 import { ApolloServer } from 'apollo-server-koa'
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core'
-import { typeDefs, resolvers } from '@/controllers/graphql'
+import { typeDefs, resolvers, schema } from '@/controllers/graphql'
 
 import './db'
 const dev = process.env.NODE_ENV !== 'production'
@@ -40,11 +40,9 @@ koaApp
   .use(apiRouter.allowedMethods())
 
 nextApp.prepare().then(async () => {
-
   // graphql
   const graphqlServer = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema,
     plugins: [
       dev ? ApolloServerPluginLandingPageLocalDefault : {
         async serverWillStart () {
@@ -66,7 +64,7 @@ nextApp.prepare().then(async () => {
       // see https://www.apollographql.com/docs/apollo-server/api/apollo-server/#middleware-specific-context-fields
 
       // Get the user token from the headers.
-      const token = ctx.headers.authorization || ''
+      // const token = ctx.headers.authorization || ''
       // Try to retrieve a user with the token
       // const user = getUser(token)
       // Add the user to the context

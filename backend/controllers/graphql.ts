@@ -1,19 +1,17 @@
-import _ from 'lodash'
-import combineDefs from '@/utils/graphql/combineDefs'
+import path from 'path'
 
-import loginDefs from '@/models/graphql/login/login.gql'
-import booksDefs from '@/models/graphql/books/books.gql'
-import userDefs from '@/models/graphql/users/users.gql'
+import { composeResolvers } from '@graphql-tools/resolvers-composition'
+import { makeExecutableSchema } from '@graphql-tools/schema'
+import { mergeTypeDefs } from '@graphql-tools/merge'
+import { loadFilesSync } from '@graphql-tools/load-files'
+import resolverMap from '@/models/graphql'
 
-import booksResolvers from '@/models/graphql/books/books.resolver'
-import loginResolvers from '@/models/graphql/login/login.resolver'
+const typesArray = loadFilesSync(path.join(__dirname, '../models/graphql'), {extensions: ['gql']})
+const resolverArray = Object.keys(resolverMap).map(key => resolverMap[key])
 
-export const typeDefs = combineDefs({
-  booksDefs,
-  userDefs,
-  loginDefs
+export const typeDefs = mergeTypeDefs(typesArray)
+export const resolvers = composeResolvers(resolverArray)
+export const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
 })
-export const resolvers = _.merge({},
-  loginResolvers,
-  booksResolvers
-)

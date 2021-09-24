@@ -5,6 +5,8 @@ import _throttle from 'lodash/throttle'
 import styles from './index.module.scss'
 import cs from 'classnames'
 import { TextField, Button } from '@material-ui/core'
+import { useQuery, gql, useLazyQuery } from '@apollo/client'
+
 
 let count = 0
 let timer = 0
@@ -71,6 +73,22 @@ const Index  = () => {
       }
     }
   }, [isActive, showLogin])
+
+  // const books = useQuery(gql`
+  //   query {
+  //     books {
+  //       title
+  //       author
+  //     }
+  //   }
+  // `)
+  // useEffect(() => {
+  //   if(!books.error) {
+  //     console.log(books.data)
+  //   }else {
+  //     console.log(books.error)
+  //   }
+  // }, [books])
   return (
     <>
       <div className = { styles['main'] }>
